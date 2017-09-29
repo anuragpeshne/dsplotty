@@ -16,19 +16,87 @@
 
  connection.onerror = function (error) {
      // an error occurred when sending/receiving data
+     console.log("Error in connection:\n" + error);
  };
 
- connection.onmessage = function (message) {
-     // try to decode json (I assume that each message
-     // from server is json)
-     try {
-         console.log(message);
-     } catch (e) {
-         return;
+ function draw_grid(num_nodes) {
+     var len = Math.ceil(Math.sqrt(num_nodes));
+     var container = document.getElementById("container");
+     container.innerHTML = '';
+     i = 1;
+     while(i <= num_nodes) {
+         var row = document.createElement("div");
+         row.className = "row";
+         for (j = 0; j < len && i <= num_nodes; j++) {
+             var cell = document.createElement("div");
+             cell.className = "cell";
+             cell.id = i;
+             row.appendChild(cell);
+             i++;
+         }
+         container.appendChild(row);
      }
-     // handle incoming message
+ }
+ connection.onmessage = function (message) {
+     command = JSON.parse(message.data);
+     console.log(command);
+     switch (command[0]) {
+         case "draw":
+             draw_grid(parseInt(command[1]));
+             break;
+
+         case "infected":
+             cell = document.getElementById(command[1]);
+             cell.className += " infected";
+             break;
+
+         case "inactive":
+             cell = document.getElementById(command[1]);
+             cell.className = cell.className.replace("infected", "").trim();
+             cell.className += " inactive";
+             break;
+
+         case "dim":
+             cell = document.getElementById(command[1]);
+             cell.className = cell.className.replace("infected", "").trim();
+             cell.className = cell.className.replace("inactive", "").trim();
+
+         default:
+             console.log("unknown command:\n" + command);
+     }
  };
 </script>
+<style>
+ #container {
+     min-width: 800px;
+     margin: 0 auto;
+     padding: 10px;
+     text-align: center;
+ }
+
+ .cell {
+     float: left;
+     width: 15px;
+     height: 15px;
+     border: solid 1px #ccc;
+     border-radius: 8px;
+ }
+
+ .row {
+     float: left;
+     width: 100%;
+ }
+
+ .infected {
+     background-color: #92CD00;
+     animation: 1s ease-in;
+ }
+
+ .inactive {
+     background-color: #FFCF79;
+     animation: 1s ease-in;
+ }
+</style>
 </head>
 <body>
   <div id="container"></div>
