@@ -1,0 +1,30 @@
+{
+  "name": "dsplotty",
+  "version": "1.0.0",
+  "description": "distributed systems visualizer",
+  "main": "index.js",
+  "dependencies": {
+    "connect": "^3.6.5",
+    "serve-static": "^1.13.0",
+    "ws": "^3.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "nodeunit index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anuragpeshne/dsplotty.git"
+  },
+  "keywords": [
+    "distributed",
+    "system",
+    "visualizer"
+  ],
+  "author": "Anurag Peshne",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anuragpeshne/dsplotty/issues"
+  },
+  "homepage": "https://github.com/anuragpeshne/dsplotty#readme"
+}

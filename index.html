@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Distributed Systems Visualizer</title>
+<script type="text/javascript">
+ const SOCKET_PORT = 8081
+ window.WebSocket = window.WebSocket || window.MozWebSocket;
+
+ var connection = new WebSocket('ws://127.0.0.1:' + SOCKET_PORT);
+
+ connection.onopen = function () {
+     // connection is opened and ready to use
+     console.log("connected");
+ };
+
+ connection.onerror = function (error) {
+     // an error occurred when sending/receiving data
+ };
+
+ connection.onmessage = function (message) {
+     // try to decode json (I assume that each message
+     // from server is json)
+     try {
+         console.log(message);
+     } catch (e) {
+         return;
+     }
+     // handle incoming message
+ };
+</script>
+</head>
+<body>
+  <div id="container"></div>
+</body>
+</html>
