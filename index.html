@@ -12,11 +12,13 @@
  connection.onopen = function () {
      // connection is opened and ready to use
      console.log("connected");
+     document.getElementById("status-bar").innerHTML = "Connected";
  };
 
  connection.onerror = function (error) {
      // an error occurred when sending/receiving data
      console.log("Error in connection:\n" + error);
+     document.getElementById("status-bar").innerHTML = "Error in connection";
  };
 
  var cell_size = 15;
@@ -25,6 +27,12 @@
      var container = document.getElementById("container");
      container.innerHTML = '';
      cell_size = Math.min((window.innerHeight - 200) / (num_nodes / len), cell_size);
+     container.setAttribute("style", "width:" + ((cell_size + 4) * len) + "px");
+     document.getElementById("status-bar").innerHTML = (
+         "<span id=\"infected-count\">0</span>" +
+         " / " +
+         "<span id=\"total-nodes\">" + num_nodes + "</span>"
+     );
 
      i = 1;
      while(i <= num_nodes) {
@@ -56,6 +64,8 @@
          case "infected":
              cell = document.getElementById(command[1]);
              cell.className += " infected";
+             var infected_count = parseInt(document.getElementById("infected-count").innerHTML);
+             document.getElementById("infected-count").innerHTML = infected_count + 1;
              break;
 
          case "inactive":
@@ -75,11 +85,13 @@
  };
 </script>
 <style>
- #container {
+ #status-bar, #container {
      margin: 0 auto;
      padding: 10px;
      text-align: center;
-     width: 1000px;
+     max-width: 1000px;
+     font-family: "Lucida Console", Monaco, monospace;
+     color: #2C6700;
  }
 
  .cell {
@@ -112,6 +124,7 @@
 </style>
 </head>
 <body>
+  <div id="status-bar"></div>
   <div id="container"></div>
 </body>
 </html>
