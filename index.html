@@ -89,12 +89,17 @@
 
  .infected {
      background-color: #92CD00;
-     animation: 1s ease-in;
+     animation:pulse 0.2s 0s alternate;
  }
 
  .inactive {
      background-color: #FFCF79;
-     animation: 1s ease-in;
+     animation:pulse 0.2s 0s alternate;
+ }
+
+ @keyframes pulse {
+     from { box-shadow:0px 0px 10px 3px #E5E4D7; }
+     to { box-shadow:0px 0px 20px 5px #E5E4D7; }
  }
 </style>
 </head>

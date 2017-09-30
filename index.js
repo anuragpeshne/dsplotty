@@ -1,6 +1,6 @@
 const STATIC_PORT = 8080;
 const SOCKET_PORT = 8081;
-const ANIM_SPEED  = 200;
+const ANIM_DELAY  = 50;
 
 commandq = [];
 inpEof = false;
@@ -49,5 +49,5 @@ wss.on('connection', function connection(ws) {
     } else if (inpEof) {
       process.exit();
     }
-  }, ANIM_SPEED);
+  }, ANIM_DELAY);
 });
