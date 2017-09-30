@@ -49,5 +49,5 @@ wss.on('connection', function connection(ws) {
     } else if (inpEof) {
       process.exit();
     }
-  }, ANIM_DELAY);
+  }, (ANIM_DELAY / Math.log(commandq.length)));
 });

@@ -19,10 +19,13 @@
      console.log("Error in connection:\n" + error);
  };
 
+ var cell_size = 15;
  function draw_grid(num_nodes) {
      var len = Math.ceil(Math.sqrt(num_nodes));
      var container = document.getElementById("container");
      container.innerHTML = '';
+     cell_size = Math.min((window.innerHeight - 200) / (num_nodes / len), cell_size);
+
      i = 1;
      while(i <= num_nodes) {
          var row = document.createElement("div");
@@ -31,6 +34,11 @@
              var cell = document.createElement("div");
              cell.className = "cell";
              cell.id = i;
+             cell.setAttribute(
+                 "style",
+                 "width:" + cell_size + "px; " +
+                 "height:" + cell_size + "px"
+             );
              row.appendChild(cell);
              i++;
          }
@@ -68,10 +76,10 @@
 </script>
 <style>
  #container {
-     min-width: 800px;
      margin: 0 auto;
      padding: 10px;
      text-align: center;
+     width: 1000px;
  }
 
  .cell {
