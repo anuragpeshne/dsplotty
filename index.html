@@ -29,6 +29,8 @@
      cell_size = Math.min((window.innerHeight - 200) / (num_nodes / len), cell_size);
      container.setAttribute("style", "width:" + ((cell_size + 4) * len) + "px");
      document.getElementById("status-bar").innerHTML = (
+         "<span id=\"inactive-count\">0</span>" +
+         " / " +
          "<span id=\"infected-count\">0</span>" +
          " / " +
          "<span id=\"total-nodes\">" + num_nodes + "</span>"
@@ -72,6 +74,8 @@
              cell = document.getElementById(command[1]);
              cell.className = cell.className.replace("infected", "").trim();
              cell.className += " inactive";
+             var inactive_count = parseInt(document.getElementById("inactive-count").innerHTML);
+             document.getElementById("inactive-count").innerHTML = inactive_count + 1;
              break;
 
          case "dim":
@@ -91,7 +95,15 @@
      text-align: center;
      max-width: 1000px;
      font-family: "Lucida Console", Monaco, monospace;
-     color: #2C6700;
+     color: #000;
+ }
+
+ #inactive-count {
+     color: #FFCF79;
+ }
+
+ #infected-count {
+     color:  #92CD00;
  }
 
  .cell {
