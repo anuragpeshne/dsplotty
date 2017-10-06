@@ -8,8 +8,8 @@ inpEof = false;
 var stdin = process.openStdin();
 stdin.addListener("data", function(d) {
   var inp = d.toString();
-  console.log(inp.trim());
   var lines = inp.split('\n');
+  lines = lines.filter(function(line) { return line.length > 0;});
   for (var lineNo = 0; lineNo < lines.length; lineNo++) {
     var plottyRegex = /.*<plotty:(.*)>.*/g;
     var plottyCommand = plottyRegex.exec(lines[lineNo]);
@@ -19,6 +19,8 @@ stdin.addListener("data", function(d) {
       command = plottyCommand.split(",");
       command = command.map(function(e) {return e.trim()});
       commandq.push(command);
+    } else {
+      console.log(lines[lineNo]);
     }
   }
 }).addListener("end", function() {
