@@ -13,4 +13,8 @@ Plotty reads in from `stdin` and dumps the information on browser using websocke
 4. `<plotty: dim, {node_id}>`: Reset a cell's look back to original. `node_id` is same as above.
 
 ### Exmaple
+#### Use sample script:
+`./sample.sh | node index.js`
+
+#### Using Gossip Protocol:
 ![Example Gif](https://raw.githubusercontent.com/anuragpeshne/dsplotty/master/img/gossip.gif)
